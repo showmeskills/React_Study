@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="example"></div>
+    <div id="example1"></div>
+    <div id="example2"></div>
+    <script type="text/javascript" src='react.development.js'></script>
+    <script type="text/javascript" src='react-dom.development.js'></script>
+    <script type="text/javascript" src='babel.min.js'></script>
+    <script type="text/babel">
+    //require arry
+        const names = ['Angular','React','Vue','Jquery','JavaScript'];
+        //create virtual DOM
+        const ul = (
+            <ul>
+                {
+                    names.map((name,index)=><li key={index}>{name}</li>)
+                }
+            </ul>
+            )
+        //render virtual DOM
+        ReactDOM.render(ul,document.getElementById('example'))
+    </script>
+    <script type="text/babel">
+        const msg = 'Hello React!'
+        const myId = 'react'
+        const vDom = React.createElement('h1',{id:myId.toLowerCase()},msg.toUpperCase())
+        ReactDOM.render(vDom,document.getElementById('example1'))
+
+        const vDom1 = React.createElement('h1',{id:myId.toUpperCase()},msg.toLowerCase())
+        ReactDOM.render(vDom1,document.getElementById('example2'))
+
+    </script>
+</body>
+</html>
