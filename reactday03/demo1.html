@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="one"></div>
+    <div id='two'></div>
+    <script type="text/javascript" src='react.development.js'></script>
+    <script type="text/javascript" src='react-dom.development.js'></script>
+    <script type="text/javascript" src='babel.min.js'></script>
+    <script type="text/javascript" src='prop-types.js'></script>
+    <script type="text/babel">
+    //props in class
+        class Person extends React.Component{
+            constructor(props){
+                super(props);
+            }
+            render(){
+                return(
+                    <ul>
+                        <li>Name:{this.props.name}</li>
+                        <li>Age:{this.props.age}</li>
+                        <li>Gander:{this.props.sex}</li>
+                    </ul>
+                )
+            }
+        }
+        Person.defaultProps={
+             age:18,
+             sex:'Female'
+        }
+        Person.propTypes = {
+            name:PropTypes.string,
+            age:PropTypes.number.isRequired
+        }
+        const p1 = {
+            name:'Kathy',
+
+        }
+        const p2 = {
+            name:'GOOG',
+            age:30,
+            sex:'Male'
+        }
+        ReactDOM.render(<Person {...p1}/>,document.getElementById('one'))
+        ReactDOM.render(<Person {...p2}/>,document.getElementById('two'))
+    </script>
+</body>
+</html>
