@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="example">
+
+    </div>
+
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/javascript" src='./prop-types.js'></script>
+    <script type='text/babel'>
+        class MyComponent extends React.Component {
+            constructor(props) {
+
+                super(props);
+                this.state={
+                    input:'',
+                }
+                this.handleShow = this.handleShow.bind(this);
+                this.handleBlur = this.handleBlur.bind(this);
+                this.handleInput = this.handleInput.bind(this);
+            }
+            handleShow(event){
+                alert(this.ipt.value);
+            }
+            handleBlur(event){
+                alert(event.target.value);
+            }
+            handleInput(event){
+                const input = this.state.input;
+                this.setState({
+                    input:event.target.value,
+                })
+            }
+            render(){
+                return(
+                    <div>
+                        <input type='text' placeholder='click to alert' ref={input=>this.ipt = input}/> &nbsp;&nbsp;
+                        <button onClick={this.handleShow}>click</button> &nbsp;&nbsp;
+                        <input type='text' placeholder='blur to alert' onBlur={this.handleBlur}/> &nbsp;&nbsp;
+                        <input type="text" placeholder='react-mvvm' onInput={this.handleInput}/>
+                        <h1>{this.state.input}</h1>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>,document.getElementById('example'))
+    </script>
+</body>
+</html>
