@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div id="example"></div>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.min.js'></script>
+
+    <script type="text/babel">
+        class Life extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {
+                    opacity:1,
+                }
+                this.componentDestroy = this.componentDestroy.bind(this);
+            }
+            componentDidMount(){
+                this.timer = setInterval(()=>{
+                    console.log("timer");
+                    let {opacity} = this.state;
+                    opacity -= 0.1;
+                    if(opacity <=0){
+                        opacity = 1;
+                    }
+                        this.setState({
+                            opacity
+                        })
+                },200)
+            }
+            componentWillUnmount(){
+                clearInterval(this.timer)
+            }
+            componentDestroy(){
+                ReactDOM.unmountComponentAtNode(document.getElementById('example'))
+            }
+
+            render(){
+                const {opacity} = this.state;
+                return(
+                    <div>
+                        <h1 style={{opacity}}>{this.props.msg}</h1>
+                        <Btn componentDestroy={this.componentDestroy}/>
+                    </div>
+                )
+            }
+        }  
+
+        class Btn extends React.Component{
+            constructor(props){
+                super(props)
+                this.distroyComponent = this.distroyComponent.bind(this);
+            }
+            distroyComponent(){
+                this.props.componentDestroy()
+            }
+            render(){
+                return(
+                    <button onClick={this.distroyComponent}>start</button>
+                )
+            }
+        }
+        Btn.propTypes = {
+            componentDestroy:PropTypes.func.isRequired,
+        }
+        ReactDOM.render(<Life msg='React is a wonderful framework'/>,document.getElementById('example'))
+    </script>
+</body>
+</html>

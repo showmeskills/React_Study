@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="example"></div>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.min.js'></script>
+
+    <script type='text/babel'>
+        //a. create component
+        class LoginForm extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {
+                    username:'',
+                    pwd:'',
+                }
+                this.submitForm = this.submitForm.bind(this);
+                this.handleUsername = this.handleUsername.bind(this);
+                this.handlePwd = this.handlePwd.bind(this);
+            }
+
+            submitForm(event){
+                event = event || window.event;
+
+                alert(`
+                 username:${this.state.username}
+                 pwd:${this.state.pwd}
+                `)
+
+                event.preventDefault()
+            }
+            handleUsername(event){
+                event = event || window.event;
+                const username = event.target.value;
+                this.setState({
+                    username,
+                })
+            }
+            handlePwd(event){
+                event = event || window.event;
+                const pwd = event.target.value;
+                this.setState({
+                    pwd,
+                })
+            }
+            render(){
+                return(
+                    <form action="/test" onSubmit={this.submitForm}>
+                        Username:<input type='text' onChange={this.handleUsername} value={this.state.username}/>
+                        <br/>
+                        Password<input type='password' onChange={this.handlePwd} value={this.state.pwd}/>
+                        <br/>
+                        <input type='submit' value='submit' />
+                    </form>
+                )
+            }
+        }
+
+        //b.render component
+        ReactDOM.render(<LoginForm/>,document.getElementById('example'))
+
+    </script>
+</body>
+</html>
