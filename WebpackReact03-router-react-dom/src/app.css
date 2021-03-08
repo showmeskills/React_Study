@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    height:500px;
+    margin: auto;
+    overflow: hidden;
+}
+.container .title h1{
+    margin-left: 300px;
+}
+.container .body{
+    margin:auto;
+    margin-top:30px;
+    width: 1000px;
+    height: 500px;
+}
+.container .body a{
+    text-decoration:none;
+}
+.container .body a:nth-child(2){
+    margin-left: 15px;
+}
+.container .body .content{
+    margin-top:20px;
+}
+.container .body .active{
+    color: red;
+}
+.content .Home .messages ul{
+    list-style-type: none;
+    margin-top:10px;
+}
